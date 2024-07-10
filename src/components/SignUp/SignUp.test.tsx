@@ -4,6 +4,7 @@ import { setupServer } from "msw/node";
 import React from "react";
 import SignUp from "./";
 import { handlers } from "./handlers";
+import { waitForButtonToBeDisabled } from "./utility";
 
 // Setting up the mock server
 const server = setupServer(...handlers);
@@ -89,6 +90,71 @@ describe("SignUp Component", () => {
       userEvent.type(passwordInput, "123456789");
 
       expect(signUpButton).toBeEnabled();
+    });
+
+    it("should disable Sign Up button when form is invalid", async () => {
+      render(<SignUp />);
+
+      const userNameInput = screen.getByLabelText(/^User Name/);
+      const emailInput = screen.getByLabelText(/^Email Address/);
+      const passwordInput = screen.getByLabelText(/^Password/);
+      const signUpButton = screen.getByRole("button", { name: "Sign Up" });
+
+      expect(signUpButton).toBeDisabled(); // All inputs are empty
+
+      userEvent.clear(emailInput);
+      userEvent.clear(passwordInput);
+      userEvent.type(userNameInput, "Jamal SaadEddin"); // User Name filled only
+      await waitForButtonToBeDisabled(signUpButton);
+
+      userEvent.clear(userNameInput);
+      userEvent.clear(passwordInput);
+      userEvent.type(emailInput, "jamalsaadeddin27@gmail.com"); // Email filled only
+      await waitForButtonToBeDisabled(signUpButton);
+
+      userEvent.clear(userNameInput);
+      userEvent.clear(emailInput);
+      userEvent.type(passwordInput, "123456789"); // Password filled only
+      await waitForButtonToBeDisabled(signUpButton);
+
+      userEvent.type(userNameInput, "Jamal SaadEddin");
+      userEvent.type(emailInput, "jamalsaadeddin27@gmail.com"); // User Name & Email filled only
+      await waitForButtonToBeDisabled(signUpButton);
+
+      userEvent.clear(emailInput);
+      userEvent.clear(userNameInput);
+      userEvent.type(userNameInput, "Jamal SaadEddin");
+      userEvent.type(passwordInput, "123456789"); // User Name & Password filled only
+      await waitForButtonToBeDisabled(signUpButton);
+
+      userEvent.clear(userNameInput);
+      userEvent.clear(passwordInput);
+      userEvent.type(emailInput, "jamalsaadeddin27@gmail.com");
+      userEvent.type(passwordInput, "123456789"); // Email & Password filled only
+      await waitForButtonToBeDisabled(signUpButton);
+
+      userEvent.clear(emailInput);
+      userEvent.clear(passwordInput);
+      userEvent.type(userNameInput, "Jamal SaadEddin");
+      userEvent.type(emailInput, "invalidEmail@");
+      userEvent.type(passwordInput, "123456789"); // All filled but invalid email
+      await waitForButtonToBeDisabled(signUpButton);
+
+      userEvent.clear(userNameInput);
+      userEvent.clear(emailInput);
+      userEvent.clear(passwordInput);
+      userEvent.type(userNameInput, "Jamal SaadEddin");
+      userEvent.type(emailInput, "jamalsaadeddin27@gmail.com");
+      userEvent.type(passwordInput, "123"); // All filled but invalid password
+      await waitForButtonToBeDisabled(signUpButton);
+
+      userEvent.clear(userNameInput);
+      userEvent.clear(emailInput);
+      userEvent.clear(passwordInput);
+      userEvent.type(userNameInput, "Jamal SaadEddin");
+      userEvent.type(emailInput, "invalidEmail@");
+      userEvent.type(passwordInput, "123"); // All filled but invalid email & invalid password
+      await waitForButtonToBeDisabled(signUpButton);
     });
   });
 });
