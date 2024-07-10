@@ -74,4 +74,21 @@ describe("SignUp Component", () => {
       expect(successMessage).toBeInTheDocument();
     });
   });
+
+  describe("Form Interaction", () => {
+    it("should enable Sign Up button when form is valid", async () => {
+      render(<SignUp />);
+
+      const userNameInput = screen.getByLabelText(/^User Name/);
+      const emailInput = screen.getByLabelText(/^Email Address/);
+      const passwordInput = screen.getByLabelText(/^Password/);
+      const signUpButton = screen.getByRole("button", { name: "Sign Up" });
+
+      userEvent.type(userNameInput, "Jamal SaadEddin");
+      userEvent.type(emailInput, "jamalsaadeddin27@gmail.com");
+      userEvent.type(passwordInput, "123456789");
+
+      expect(signUpButton).toBeEnabled();
+    });
+  });
 });
