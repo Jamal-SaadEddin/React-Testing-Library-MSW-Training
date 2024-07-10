@@ -1,9 +1,10 @@
-import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { setupServer } from "msw/node";
+import React from "react";
 import SignUp from "./";
 import { handlers } from "./handlers";
-import { debug } from "jest-preview";
+
 // Setting up the mock server
 const server = setupServer(...handlers);
 
@@ -15,38 +16,13 @@ describe("SignUp Component", () => {
   describe("Validation", () => {
     it("should display validation errors for invalid email", async () => {
       render(<SignUp />);
-      // use jest preview to debug your test
-      debug();
-    });
 
-    it("should display validation errors for short password", async () => {
-      render(<SignUp />);
-    });
+      const emailInput = screen.getByLabelText(/^Email Address/);
+      userEvent.type(emailInput, "invalidEmail@");
+      userEvent.tab();
 
-    it("should display success message on successful sign-up", async () => {
-      render(<SignUp />);
-    });
-
-    it("should display error message on sign-up failure", async () => {
-      render(<SignUp />);
-    });
-  });
-
-  describe("Form Interaction", () => {
-    it("should enable Sign Up button when form is valid", async () => {
-      render(<SignUp />);
-    });
-
-    it("should disable Sign Up button when form is invalid", async () => {
-      render(<SignUp />);
-    });
-
-    it("should update form fields on user input", async () => {
-      render(<SignUp />);
-    });
-
-    it("should redirect user to home page after successful signup", async () => {
-      render(<SignUp />);
+      const errorMessage = await screen.findByText("Enter a valid email");
+      expect(errorMessage).toBeInTheDocument();
     });
   });
 });

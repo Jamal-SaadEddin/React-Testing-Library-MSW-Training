@@ -41,7 +41,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "jest-preview": "jest-preview"
   },
   "eslintConfig": {
     "extends": [
@@ -71,6 +72,9 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "@babel/preset-typescript": "^7.24.6",
-    "@babel/types": "^7.15.0"
+    "@babel/types": "^7.15.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^24.1.0"
   }
 }

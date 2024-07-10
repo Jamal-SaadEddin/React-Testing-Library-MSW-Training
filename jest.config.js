@@ -4,6 +4,9 @@ module.exports = {
   roots: ["<rootDir>/src"],
   verbose: true,
   testEnvironment: "jsdom",
+  testEnvironmentOptions: {
+    customExportConditions: [""],
+  },
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
   moduleFileExtensions: ["js", "jsx", "ts", "tsx"],
   moduleDirectories: ["node_modules", "src"],
