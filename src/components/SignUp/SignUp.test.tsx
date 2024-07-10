@@ -24,5 +24,18 @@ describe("SignUp Component", () => {
       const errorMessage = await screen.findByText("Enter a valid email");
       expect(errorMessage).toBeInTheDocument();
     });
+
+    it("should display validation errors for short password", async () => {
+      render(<SignUp />);
+
+      const passwordInput = screen.getByLabelText(/^Password/);
+      userEvent.type(passwordInput, "123");
+      userEvent.tab();
+
+      const errorMessage = await screen.findByText(
+        "Password should be of minimum 8 characters length"
+      );
+      expect(errorMessage).toBeInTheDocument();
+    });
   });
 });
