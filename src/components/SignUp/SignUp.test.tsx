@@ -55,5 +55,23 @@ describe("SignUp Component", () => {
       const successMessage = await screen.findByText("Sign Up Successfully!");
       expect(successMessage).toBeInTheDocument();
     });
+
+    it("should display error message on sign-up failure", async () => {
+      render(<SignUp />);
+
+      const userNameInput = screen.getByLabelText(/^User Name/);
+      const emailInput = screen.getByLabelText(/^Email Address/);
+      const passwordInput = screen.getByLabelText(/^Password/);
+      const signUpButton = screen.getByRole("button", { name: "Sign Up" });
+
+      userEvent.type(userNameInput, "Jamal SaadEddin");
+      userEvent.type(emailInput, "fail@example.com");
+      userEvent.type(passwordInput, "123456789");
+
+      userEvent.click(signUpButton);
+
+      const successMessage = await screen.findByText("Error Signing Up!");
+      expect(successMessage).toBeInTheDocument();
+    });
   });
 });
