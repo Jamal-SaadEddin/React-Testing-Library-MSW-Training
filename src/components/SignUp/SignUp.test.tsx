@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { setupServer } from "msw/node";
 import React from "react";
@@ -22,6 +22,7 @@ describe("SignUp Component", () => {
       render(<SignUp />);
 
       const emailInput = screen.getByLabelText(/^Email Address/);
+
       userEvent.type(emailInput, "invalidEmail@");
       userEvent.tab();
 
@@ -33,6 +34,7 @@ describe("SignUp Component", () => {
       render(<SignUp />);
 
       const passwordInput = screen.getByLabelText(/^Password/);
+
       userEvent.type(passwordInput, "123");
       userEvent.tab();
 
@@ -74,8 +76,8 @@ describe("SignUp Component", () => {
 
       userEvent.click(signUpButton);
 
-      const successMessage = await screen.findByText("Error Signing Up!");
-      expect(successMessage).toBeInTheDocument();
+      const errorMessage = await screen.findByText("Error Signing Up!");
+      expect(errorMessage).toBeInTheDocument();
     });
   });
 
@@ -92,7 +94,7 @@ describe("SignUp Component", () => {
       userEvent.type(emailInput, "jamalsaadeddin27@gmail.com");
       userEvent.type(passwordInput, "123456789");
 
-      expect(signUpButton).toBeEnabled();
+      await waitFor(() => expect(signUpButton).toBeEnabled());
     });
 
     it("should disable Sign Up button when form is invalid", async () => {
@@ -174,13 +176,15 @@ describe("SignUp Component", () => {
       ) as HTMLInputElement;
 
       userEvent.type(userNameInput, "Jamal SaadEddin");
-      expect(userNameInput.value).toBe("Jamal SaadEddin");
+      await waitFor(() => expect(userNameInput.value).toBe("Jamal SaadEddin"));
 
       userEvent.type(emailInput, "jamalsaadeddin27@gmail.com");
-      expect(emailInput.value).toBe("jamalsaadeddin27@gmail.com");
+      await waitFor(() =>
+        expect(emailInput.value).toBe("jamalsaadeddin27@gmail.com")
+      );
 
       userEvent.type(passwordInput, "123456789");
-      expect(passwordInput.value).toBe("123456789");
+      await waitFor(() => expect(passwordInput.value).toBe("123456789"));
     });
 
     it("should redirect user to home page after successful signup", async () => {
@@ -199,6 +203,7 @@ describe("SignUp Component", () => {
 
       const successMessage = await screen.findByText("Sign Up Successfully!");
       expect(successMessage).toBeInTheDocument();
+
       expect(screen.getByText("Home Page")).toBeInTheDocument();
     });
   });
