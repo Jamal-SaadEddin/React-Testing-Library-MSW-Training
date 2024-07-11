@@ -156,5 +156,28 @@ describe("SignUp Component", () => {
       userEvent.type(passwordInput, "123"); // All filled but invalid email & invalid password
       await waitForButtonToBeDisabled(signUpButton);
     });
+
+    it("should update form fields on user input", async () => {
+      render(<SignUp />);
+
+      const userNameInput = screen.getByLabelText(
+        /^User Name/
+      ) as HTMLInputElement;
+      const emailInput = screen.getByLabelText(
+        /^Email Address/
+      ) as HTMLInputElement;
+      const passwordInput = screen.getByLabelText(
+        /^Password/
+      ) as HTMLInputElement;
+
+      userEvent.type(userNameInput, "Jamal SaadEddin");
+      expect(userNameInput.value).toBe("Jamal SaadEddin");
+
+      userEvent.type(emailInput, "jamalsaadeddin27@gmail.com");
+      expect(emailInput.value).toBe("jamalsaadeddin27@gmail.com");
+
+      userEvent.type(passwordInput, "123456789");
+      expect(passwordInput.value).toBe("123456789");
+    });
   });
 });
