@@ -1,6 +1,9 @@
 # React-Testing-Library-MSW-Training
 
-This repository contains the React Testing Task assigned during my Frontend internship at Foothill Technology Solutions. The primary objective of this task is to learn and practice React Testing Library and Mock Service Worker (MSW) for testing React components.
+This repository contains the React Testing Task assigned during my Frontend internship at Foothill Technology Solutions. The primary objective of this task is to learn and practice React Testing Library and Mock Service Worker (MSW) for testing React components. 
+
+The task was prepared by [Mahmoud Abd Al Kareem here](https://github.com/MahmoudAbdAlKareem/react-testing-library-msw-training) and was forked from this repository. The React project was already set up; I focused on writing tests in my own forked repo.
+
 
 ## Overview
 
@@ -69,6 +72,7 @@ This project has been an excellent opportunity to delve into React Testing Libra
 ## Acknowledgements
 - This task is part of the Foothill Technology Solutions Internship Cycle.
 - Big thanks to my trainer [@Huthaifa](https://github.com/Huthaifa-Dev)
+- Big thanks to my trainer [@Mahmoud](https://github.com/MahmoudAbdAlKareem)
 <img src="https://github.com/Jamal-SaadEddin/TodoTick/assets/104212352/9d3c83b0-5ea8-46ff-93e8-f1504af9dc67" width="400" alt="foothill logo">
 
 
