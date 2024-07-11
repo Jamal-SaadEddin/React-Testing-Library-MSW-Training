@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/React-Testing-Library-MSW-Training/static/css/main.e6c13ad2.css",
+    "main.js": "/React-Testing-Library-MSW-Training/static/js/main.423ed6ca.js",
+    "static/js/845.044af64e.chunk.js": "/React-Testing-Library-MSW-Training/static/js/845.044af64e.chunk.js",
+    "index.html": "/React-Testing-Library-MSW-Training/index.html",
+    "main.e6c13ad2.css.map": "/React-Testing-Library-MSW-Training/static/css/main.e6c13ad2.css.map",
+    "main.423ed6ca.js.map": "/React-Testing-Library-MSW-Training/static/js/main.423ed6ca.js.map",
+    "845.044af64e.chunk.js.map": "/React-Testing-Library-MSW-Training/static/js/845.044af64e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.423ed6ca.js"
+  ]
+}
