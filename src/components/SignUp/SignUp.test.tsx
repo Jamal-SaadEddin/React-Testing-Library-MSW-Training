@@ -4,7 +4,6 @@ import { setupServer } from "msw/node";
 import React from "react";
 import SignUp from "./";
 import { handlers } from "./handlers";
-import { waitForButtonToBeDisabled } from "./utility";
 
 // Setting up the mock server
 const server = setupServer(...handlers);
@@ -110,40 +109,40 @@ describe("SignUp Component", () => {
       userEvent.clear(emailInput);
       userEvent.clear(passwordInput);
       userEvent.type(userNameInput, "Jamal SaadEddin"); // User Name filled only
-      await waitForButtonToBeDisabled(signUpButton);
+      await waitFor(() => expect(signUpButton).toBeDisabled());
 
       userEvent.clear(userNameInput);
       userEvent.clear(passwordInput);
       userEvent.type(emailInput, "jamalsaadeddin27@gmail.com"); // Email filled only
-      await waitForButtonToBeDisabled(signUpButton);
+      await waitFor(() => expect(signUpButton).toBeDisabled());
 
       userEvent.clear(userNameInput);
       userEvent.clear(emailInput);
       userEvent.type(passwordInput, "123456789"); // Password filled only
-      await waitForButtonToBeDisabled(signUpButton);
+      await waitFor(() => expect(signUpButton).toBeDisabled());
 
       userEvent.type(userNameInput, "Jamal SaadEddin");
       userEvent.type(emailInput, "jamalsaadeddin27@gmail.com"); // User Name & Email filled only
-      await waitForButtonToBeDisabled(signUpButton);
+      await waitFor(() => expect(signUpButton).toBeDisabled());
 
       userEvent.clear(emailInput);
       userEvent.clear(userNameInput);
       userEvent.type(userNameInput, "Jamal SaadEddin");
       userEvent.type(passwordInput, "123456789"); // User Name & Password filled only
-      await waitForButtonToBeDisabled(signUpButton);
+      await waitFor(() => expect(signUpButton).toBeDisabled());
 
       userEvent.clear(userNameInput);
       userEvent.clear(passwordInput);
       userEvent.type(emailInput, "jamalsaadeddin27@gmail.com");
       userEvent.type(passwordInput, "123456789"); // Email & Password filled only
-      await waitForButtonToBeDisabled(signUpButton);
+      await waitFor(() => expect(signUpButton).toBeDisabled());
 
       userEvent.clear(emailInput);
       userEvent.clear(passwordInput);
       userEvent.type(userNameInput, "Jamal SaadEddin");
       userEvent.type(emailInput, "invalidEmail@");
       userEvent.type(passwordInput, "123456789"); // All filled but invalid email
-      await waitForButtonToBeDisabled(signUpButton);
+      await waitFor(() => expect(signUpButton).toBeDisabled());
 
       userEvent.clear(userNameInput);
       userEvent.clear(emailInput);
@@ -151,7 +150,7 @@ describe("SignUp Component", () => {
       userEvent.type(userNameInput, "Jamal SaadEddin");
       userEvent.type(emailInput, "jamalsaadeddin27@gmail.com");
       userEvent.type(passwordInput, "123"); // All filled but invalid password
-      await waitForButtonToBeDisabled(signUpButton);
+      await waitFor(() => expect(signUpButton).toBeDisabled());
 
       userEvent.clear(userNameInput);
       userEvent.clear(emailInput);
@@ -159,7 +158,7 @@ describe("SignUp Component", () => {
       userEvent.type(userNameInput, "Jamal SaadEddin");
       userEvent.type(emailInput, "invalidEmail@");
       userEvent.type(passwordInput, "123"); // All filled but invalid email & invalid password
-      await waitForButtonToBeDisabled(signUpButton);
+      await waitFor(() => expect(signUpButton).toBeDisabled());
     });
 
     it("should update form fields on user input", async () => {
